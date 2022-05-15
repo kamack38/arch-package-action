@@ -53,7 +53,7 @@ if [[ $INPUT_NAMCAP == true ]]; then
 fi
 
 # Install depends using paru from aur
-if [[ -n $INPUT_PARU ]]; then
+if [[ $INPUT_PARU == true ]]; then
     echo "::group::Making package using paru"
     paru -U --noconfirm
     echo "::endgroup::"
