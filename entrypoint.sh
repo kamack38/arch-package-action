@@ -24,7 +24,7 @@ if [[ -n $INPUT_PKGVER ]]; then
     echo "::endgroup::"
 fi
 
-# Update pkgver
+# Update pkgrel
 if [[ -n $INPUT_PKGREL ]]; then
     CURR_PKGREL=$(sed -n "s:^pkgrel=\(.*\):\1:p" PKGBUILD)
     echo "::group::Updating pkgrel on PKGBUILD from $CURR_PKGREL to $INPUT_PKGREL"
