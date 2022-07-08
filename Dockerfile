@@ -2,7 +2,7 @@
 FROM archlinux:base-devel
 
 # Install dependencies
-RUN pacman -Syu --needed --noconfirm pacman-contrib namcap git
+RUN pacman -Syu --needed --noconfirm pacman-contrib namcap git base-devel openssh
 
 # Add multilib repository
 RUN printf '[multilib]\nInclude = /etc/pacman.d/mirrorlist' >> /etc/pacman.conf
@@ -21,6 +21,7 @@ RUN cd paru-bin && makepkg -si --noconfirm
 # Copy files
 COPY LICENSE README.md /
 COPY entrypoint.sh /entrypoint.sh
+COPY ssh_config /ssh_config
 
 # Set entrypoint
 ENTRYPOINT ["/entrypoint.sh"]

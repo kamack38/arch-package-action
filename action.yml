@@ -39,6 +39,31 @@ inputs:
     description: 'Make package using paru'
     default: 'false'
     required: false
+  aur_pkgname:
+    description: 'AUR package name'
+    required: false
+  aur_commit_username:
+    description: 'The username to use when pushing package to the AUR'
+    required: false
+  aur_commit_email:
+    description: 'The email to use when pushing package to the AUR'
+    required: false
+  aur_ssh_private_key:
+    description: 'Your private key with access to the AUR package.'
+    required: false
+  aur_commit_message:
+    description: 'Commit message to use when pushing package to the AUR'
+    required: false
+    default: 'Update package with GitHub Actions'
+  aur_force_push:
+    description: 'Use --force when pushing to the AUR.'
+    required: false
+    default: 'false'
+outputs:
+  OLD_PKGVER:
+    description: 'Old package version'
+  NEW_PKGVER:
+    description: 'New package version'
 
 runs:
   using: 'docker'
@@ -51,4 +76,10 @@ runs:
     - ${{ inputs.srcinfo }}
     - ${{ inputs.flags }}
     - ${{ inputs.namcap }}
-    - ${{ inputs.aur }}
+    - ${{ inputs.paru }}
+    - ${{ inputs.aur_pkgname }}
+    - ${{ inputs.aur_commit_username }}
+    - ${{ inputs.aur_commit_email }}
+    - ${{ inputs.aur_commit_message }}
+    - ${{ inputs.aur_ssh_private_key }}
+    - ${{ inputs.aur_force_push }}
