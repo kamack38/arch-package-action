@@ -120,6 +120,10 @@ if [[ -n $INPUT_AUR_PKGNAME && -n $INPUT_AUR_SSH_PRIVATE_KEY && -n $INPUT_AUR_CO
     git diff-index --quiet HEAD || git commit -m "$INPUT_AUR_COMMIT_MESSAGE" # use `git diff-index --quiet HEAD ||` to avoid error
     echo '::endgroup::'
 
+    echo '::group::Listing files in the repository'
+    ls -al
+    echo '::endgroup::'
+
     echo '::group::Publishing the repository'
     git remote add aur "ssh://aur@aur.archlinux.org/${INPUT_AUR_PKGNAME}.git"
     case "$INPUT_AUR_FORCE_PUSH" in
