@@ -111,7 +111,7 @@ if [[ -n $INPUT_AUR_PKGNAME && -n $INPUT_AUR_SSH_PRIVATE_KEY && -n $INPUT_AUR_CO
     echo '::endgroup::'
 
     echo "::group::Copying files into /tmp/aur-repo"
-    cp -fva "$WORKPATH/" /tmp/aur-repo
+    cp -fva "$WORKPATH/." /tmp/aur-repo
     echo '::endgroup::'
 
     echo '::group::Committing files to the repository'
