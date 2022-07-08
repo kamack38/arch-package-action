@@ -54,7 +54,6 @@ inputs:
   aur_commit_message:
     description: 'Commit message to use when pushing package to the AUR'
     required: false
-    default: 'Update package with GitHub Actions'
   aur_force_push:
     description: 'Use --force when pushing to the AUR.'
     required: false

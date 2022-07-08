@@ -77,6 +77,10 @@ fi
 echo "::endgroup::"
 
 if [[ -n $INPUT_AUR_PKGNAME && -n $INPUT_AUR_SSH_PRIVATE_KEY && -n $INPUT_AUR_COMMIT_EMAIL && -n $INPUT_AUR_COMMIT_USERNAME ]]; then
+    if [ "$INPUT_AUR_COMMIT_MESSAGE" == "" ]; then
+        INPUT_AUR_COMMIT_MESSAGE="Update $INPUT_AUR_PKGNAME to $NEW_PKGVER"
+    fi
+
     echo '::group::Initializing SSH directory'
     mkdir -pv $HOME/.ssh
     touch $HOME/.ssh/known_hosts
