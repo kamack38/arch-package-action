@@ -49,8 +49,7 @@ echo "::set-output name=NEW_PKGVER::$NEW_PKGVER"
 # Update checksums
 if [[ $INPUT_UPDPKGSUMS == true ]]; then
     echo "::group::Updating checksums on PKGBUILD"
-    shopt -s extglob
-    rm -rfv !(*.install|PKGBUILD)
+    find . -type f -not \( -name 'PKGBUILD' -or -name '*.install' \) -delete
     updpkgsums
     git diff PKGBUILD
     echo "::endgroup::"
