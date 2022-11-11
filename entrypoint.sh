@@ -53,7 +53,7 @@ if [[ $INPUT_UPDPKGSUMS == true ]]; then
     source PKGBUILD
 
     # Delete all files except sources
-    find . -maxdepth 1 -not \( -name '.' -or -name 'PKGBUILD' $(echo "${source[*]} $install" | sed 's/git\+\S*\s//;s/[^ ]* */-or -name &/g') \) -exec rm -rf {} +
+    find . -maxdepth 1 -not \( -name '.' -or -name 'PKGBUILD' $(echo "${source[*]} $install" | sed 's/git\+\S*\s//;s/[^ ]* */-or -name &/g') \) -exec rm -rvf {} +
     echo "::endgroup::"
     echo "::group::Updating checksums on PKGBUILD"
     updpkgsums
