@@ -4,12 +4,12 @@ set -o errexit -o pipefail -o nounset
 # Set path
 WORKPATH=$GITHUB_WORKSPACE/$INPUT_PATH
 HOME=/home/builder
-echo "::group::Copying files from $WORKPATH to $HOME/gh-action"
+BUILDPATH="$HOME/gh-action"
+echo "::group::Copying files from $WORKPATH to $BUILDPATH"
 
 # Set path permision
-cd $HOME
-mkdir gh-action
-cd gh-action
+mkdir -p $BUILDPATH
+cd $BUILDPATH
 cp -rfv "$GITHUB_WORKSPACE"/.git ./
 cp -fv "$WORKPATH"/* ./
 echo "::endgroup::"
@@ -48,8 +48,14 @@ echo "NEW_PKGVER=$NEW_PKGVER" >>$GITHUB_OUTPUT
 
 # Update checksums
 if [[ $INPUT_UPDPKGSUMS == true ]]; then
+    echo "::group::Cleaning build directory"
+    # Get sources
+    source PKGBUILD
+
+    # Delete all files except sources
+    find . -maxdepth 1 -not \( -name '.' -or -name 'PKGBUILD' $(echo "${source[*]} $install" | sed 's/git\+\S*\s//;s/[^ ]* */-or -name &/g') \) -exec rm -rf {} +
+    echo "::endgroup::"
     echo "::group::Updating checksums on PKGBUILD"
-    find . -maxdepth 1 -type f -not \( -name 'PKGBUILD' -or -name '*.install' \) -delete
     updpkgsums
     git diff PKGBUILD
     echo "::endgroup::"
