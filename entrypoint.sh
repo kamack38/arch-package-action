@@ -16,7 +16,7 @@ echo "::endgroup::"
 
 # Update pkgver
 CURR_PKGVER=$(sed -n "s:^pkgver=\(.*\):\1:p" PKGBUILD)
-echo "OLD_PKGVER=$CURR_PKGVER" >>$GITHUB_OUTPUT
+echo "::set-output name=OLD_PKGVER::$CURR_PKGVER"
 if [[ -n $INPUT_PKGVER ]]; then
     echo "::group::Updating pkgver on PKGBUILD from $CURR_PKGVER to $INPUT_PKGVER"
     sed -i "s:^pkgver=.*$:pkgver=$INPUT_PKGVER:g" PKGBUILD
@@ -44,7 +44,7 @@ elif [[ -n $INPUT_FLAGS ]]; then
     echo "::endgroup::"
 fi
 NEW_PKGVER=$(sed -n "s:^pkgver=\(.*\):\1:p" PKGBUILD)
-echo "NEW_PKGVER=$NEW_PKGVER" >>$GITHUB_OUTPUT
+echo "::set-output name=NEW_PKGVER::$NEW_PKGVER"
 
 # Update checksums
 if [[ $INPUT_UPDPKGSUMS == true ]]; then
