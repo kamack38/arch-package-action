@@ -51,7 +51,7 @@ echo "::set-output name=NEW_PKGVER::$NEW_PKGVER"
 if [[ $INPUT_UPDPKGSUMS == true ]]; then
     echo "::group::Cleaning build directory"
     # Delete all files except PKGBUILD
-    find . -maxdepth 1 -not \( -name '.' -or -name 'PKGBUILD' \) -exec rm -rvf {} +
+    find . -maxdepth 1 -not \( -name '.' -or -name 'PKGBUILD' -or -name '.git' \) -exec rm -rvf {} +
     # Copy other files
     cp -fv "$WORKPATH"/!(PKGBUILD) ./
     # List existing files
