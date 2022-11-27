@@ -53,7 +53,7 @@ if [[ $INPUT_UPDPKGSUMS == true ]]; then
     # Delete all files except PKGBUILD
     find . -maxdepth 1 -not \( -name '.' -or -name 'PKGBUILD' \) -exec rm -rvf {} +
     # Copy other files
-    find "$WORKPATH" ! -name '.git' -exec cp -t ./ {} +
+    find "$WORKPATH" ! -name 'PKGBUILD' -exec cp -t ./ {} +
     # List existing files
     ls -a
     echo "::endgroup::"
